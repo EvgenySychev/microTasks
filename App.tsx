@@ -3,8 +3,56 @@ import './App.css';
 import {Button} from "./component/Button";
 import {NewComponent} from "./NewComponent";
 import {AnotherNewComponent} from "./component/AnotherNewComponent";
-
+import {FullInput} from "./component/FullInput";
+import {Input} from "./component/Input";
+import {ButtonForInput} from "./component/ButtonForInput";
 export type FilterType = 'all'|'Dollars'|'RUBLS'
+
+
+function App() {
+
+    let [message, setMessage] = useState([
+        {message: 'message1'},
+        {message: 'message2'},
+        {message: 'message3'}
+    ])
+
+    let [title,setTitle] = useState('')
+
+    const addMessage = (title:string) => {
+
+        let newMessage = {message: title}
+        setMessage([newMessage,...message])
+    }
+
+    const callBackButtonHandler = () =>{
+        addMessage(title)
+        setTitle('')
+    }
+
+
+
+    return (
+        <div className={'App'}>
+            <Input title={title} setTitle={setTitle}/>
+            <ButtonForInput name={'+'} callBack={callBackButtonHandler}/>
+
+
+           {/* <FullInput addMessage={addMessage}/>*/}
+            {message.map((el, index) => {
+                return (
+                    <div key={index}>{el.message}</div>
+                )
+            })}
+        </div>
+    )
+}
+
+export default App;
+
+//******************************************* Filter *************************************************************
+
+/*export type FilterType = 'all'|'Dollars'|'RUBLS'
 
 function App() {
 
@@ -41,7 +89,7 @@ function App() {
         <>
 
             <AnotherNewComponent currentMoney1={currentMoney} callBack={onClickFilterHandler}/>
-            {/*<ul>
+            {/!*<ul>
                 {currentMoney.map((objFromMoneyArray, index) => {
                     return (
                         <li key={index}>
@@ -57,7 +105,7 @@ function App() {
                 <button onClick={() => onClickFilterHandler('all')}>all</button>
                 <button onClick={() => onClickFilterHandler('RUBLS')}>RUBLS</button>
                 <button onClick={() => onClickFilterHandler('Dollars')}>Dollars</button>
-            </div>*/}
+            </div>*!/}
         </>
 
 
@@ -66,7 +114,7 @@ function App() {
 }
 
 
-export default App;
+export default App;*/
 
 
 //******************************************* Button *************************************************************
